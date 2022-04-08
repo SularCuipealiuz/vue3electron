@@ -2,7 +2,13 @@
   <section>
     <div class="keyboard">
       <div v-for="(row, rKey) in state.list" :key="rKey">
-        <div class="button" v-for="(item, iKey) in row" :key="iKey" :id="iKey">
+        <div
+          class="button"
+          v-for="(item, iKey) in row"
+          :key="iKey"
+          :id="iKey"
+          v-on:click="clickEvent(iKey)"
+        >
           {{ item }}
         </div>
       </div>
@@ -12,17 +18,33 @@
 
 <script>
 import { list } from "../json/keyboard.json";
-import { reactive } from "vue";
+import { onMounted, reactive } from "vue";
 
 export default {
-  name: "KeyboardTemp",
+  name: "ConfigTemp",
   setup() {
     const state = reactive({
-      list: list,
+      list: null,
     });
+
+    onMounted(() => {
+      const keymap = localStorage.getItem("keymap");
+
+      if (keymap === "null") {
+        localStorage.setItem("keymap", keymap);
+        state.list = list;
+      } else {
+        state.list = keymap;
+      }
+    });
+
+    function clickEvent(e) {
+      console.log(e);
+    }
 
     return {
       state,
+      clickEvent,
     };
   },
 };
@@ -35,15 +57,6 @@ section {
   margin: 0;
   padding: 0;
   overflow: hidden;
-}
-
-.hidden {
-  display: none !important;
-}
-
-div.container {
-  display: block;
-  white-space: nowrap;
 }
 
 div.keyboard {
@@ -63,15 +76,6 @@ div.keyboard {
   > div:first-child {
     margin-bottom: 10px;
   }
-}
-
-div.mouse {
-  display: inline-block;
-  margin: 10px;
-}
-
-div.mouse > svg {
-  width: 200px;
 }
 
 div.button,
@@ -156,14 +160,5 @@ div.big-line {
 
 div.released {
   animation: key-released 0.5s ease-out; /* animation settings for key releasing */
-}
-
-@keyframes key-released {
-  from {
-    background-color: #96cf13; /* key released color */
-  }
-  to {
-    background-color: transparent;
-  }
 }
 </style>
