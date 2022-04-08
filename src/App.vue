@@ -1,9 +1,9 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/map">Map</router-link>
+    <router-link to="/config">Config</router-link>
   </nav>
-  <router-view />
+  <router-view name="page" />
 </template>
 
 <style lang="scss">
@@ -24,6 +24,7 @@ nav {
 
     &.router-link-exact-active {
       color: #42b983;
+      verticalalign: middle;
     }
   }
 }
