@@ -91,9 +91,7 @@
       "RightCtrl": "Ctrl",
       "Left": "←",
       "Down": "↓",
-      "Right": "→",
-      "Num0": "0",
-      "NumPeriod": "."
+      "Right": "→"
     }
   ]
 }

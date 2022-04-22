@@ -1,12 +1,12 @@
 <template>
-  <config-temp></config-temp>
+  <keyboard-temp></keyboard-temp>
 </template>
 
 <script>
-import ConfigTemp from "@/components/ConfigTemp";
+import KeyboardTemp from "@/components/KeyboardTemp";
 export default {
   name: "ConfigView",
-  components: { ConfigTemp },
+  components: { KeyboardTemp },
 };
 </script>
 
